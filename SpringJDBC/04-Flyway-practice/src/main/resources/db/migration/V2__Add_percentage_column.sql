@@ -1,0 +1,1 @@
+ALTER TABLE student ADD COLUMN percentage NUMERIC(5,2);
