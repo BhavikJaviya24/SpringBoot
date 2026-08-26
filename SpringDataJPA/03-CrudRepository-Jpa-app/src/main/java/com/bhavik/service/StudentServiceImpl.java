@@ -15,7 +15,12 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository studentRepository;
 
     @Override
-    public Student saveStudent(Student student) {
+    public boolean studentExistById(Integer id) {
+        return studentRepository.existsById(id);
+    }
+
+    @Override
+    public Student saveOrUpdateStudent(Student student) {
         return studentRepository.save(student);
     }
 
@@ -25,23 +30,26 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student updateStudent(Student student) {
-        return studentRepository.save(student);
+    public boolean deleteStudent(Student student) {
+        studentRepository.delete(student);
+        return true;
     }
 
     @Override
-    public Student saveOrUpdateStudent(Student student) {
-        return studentRepository.save(student);
+    public boolean deleteAllStudent() {
+        studentRepository.deleteAll();
+        return true;
     }
 
     @Override
-    public Optional<Student> fetchById(Integer rno) {
-        return studentRepository.findById(rno);
-    }
-
-    @Override
-    public List<Student> fetchAllStudent() {
-        return (List<Student>) studentRepository.findAll();
+    public boolean deleteAllStudent(List<Student> students) {
+        if(!students.isEmpty()){
+            studentRepository.deleteAll();
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     @Override
@@ -55,7 +63,35 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
+    @Override
+    public boolean deleteAllStudentById(List<Integer> ids) {
+        if(!ids.isEmpty()){
+            studentRepository.deleteAllById(ids);
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 
+    @Override
+    public Optional<Student> fetchById(Integer rno) {
+        return studentRepository.findById(rno);
+    }
 
+    @Override
+    public List<Student> fetchAllStudent() {
+        return (List<Student>) studentRepository.findAll();
+    }
 
+    @Override
+    public List<Student> fetchAllStudentById(List<Integer> ids) {
+        if(!ids.isEmpty()){
+            return (List<Student>) studentRepository.findAllById(ids);
+
+        }
+        else{
+            return List.of();
+        }
+    }
 }

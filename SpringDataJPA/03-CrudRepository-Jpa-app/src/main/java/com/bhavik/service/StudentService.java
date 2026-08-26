@@ -6,11 +6,19 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudentService {
-    public Student saveStudent(Student student);
-    public List<Student> saveAllStudent(List<Student> students);
-    public Student updateStudent(Student student);
+    public boolean studentExistById(Integer id);
+
     public Student saveOrUpdateStudent(Student student);
+    public List<Student> saveAllStudent(List<Student> students);
+
+    public boolean deleteStudent(Student student);
+    public boolean deleteAllStudent();
+    public boolean deleteAllStudent(List<Student> students);
+    public boolean deleteStudentById(Integer rno);
+    public boolean deleteAllStudentById(List<Integer> ids);
+
     public Optional<Student> fetchById(Integer rno);
     public List<Student> fetchAllStudent();
-    public boolean deleteStudentById(Integer rno);
+    public List<Student> fetchAllStudentById(List<Integer> ids);
+
 }
