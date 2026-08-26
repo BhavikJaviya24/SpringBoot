@@ -2,7 +2,8 @@ package com.bhavik.repository;
 
 import com.bhavik.entity.Student;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface StudentRepository extends CrudRepository<Student, Integer>
-{
+@Repository
+public interface StudentRepository extends CrudRepository<Student, Integer> {
 }
